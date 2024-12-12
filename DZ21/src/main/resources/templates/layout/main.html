@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Application</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Library Application</h1>
+    <nav>
+        <a th:href="@{/templates/books}">Books List</a> |
+        <a th:href="@{/templates/books/new}">Add New Book</a>
+    </nav>
+</header>
+
+<main>
+    <div th:replace="${content}">
+        <!-- Content will be inserted here -->
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Library Application</p>
+</footer>
+</body>
+</html>
