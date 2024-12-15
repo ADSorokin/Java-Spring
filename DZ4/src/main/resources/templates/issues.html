@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Issue</title>
 </head>
 <body>
 <table>
-  <tr><th>Name</th></tr>
-  <tr th:each="reader : ${readers}">
-    <td th:text="${reader.name}"></td>
-  </tr>
+    <tr><th>Книга</th><th>Читатель</th><th>Дата выдачи</th></tr>
+    <tr th:each="issue : ${issues}">
+        <td th:text="${issue.book.title}"></td>
+        <td th:text="${issue.reader.name}"></td>
+        <td th:text="${issue.borrowedDate}"></td>
+    </tr>
 </table>
 </body>
 </html>

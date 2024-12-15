@@ -1,6 +1,7 @@
 package ru.sorokinad.dz4.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -18,7 +19,8 @@ public class Issue {
     private LocalDate borrowedDate;
     private LocalDate returnedDate;
 
-    public Issue() {}
+    public Issue() {
+    }
 
     public Issue(Book book, Reader reader, LocalDate borrowedDate, LocalDate returnedDate) {
         this.book = book;

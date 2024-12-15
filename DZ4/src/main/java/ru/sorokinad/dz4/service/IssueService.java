@@ -1,22 +1,35 @@
 package ru.sorokinad.dz4.service;
 
 import org.springframework.stereotype.Service;
+import ru.sorokinad.dz4.model.Book;
 import ru.sorokinad.dz4.model.Issue;
+import ru.sorokinad.dz4.model.Reader;
+import ru.sorokinad.dz4.repository.IssueRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class IssueService {
-    private final List<Issue> issues = new ArrayList<>();
+    private final IssueRepository issueRepository;
 
-    public IssueService(BookService bookService, ReaderService readerService) {
-        // Initial issues
-        issues.add(new Issue(bookService.findAll().get(0), readerService.getAllReaders().get(0), LocalDate.now().minusDays(2), null));
+    public IssueService(IssueRepository issueRepository) {
+        this.issueRepository = issueRepository;
     }
 
+
     public List<Issue> getAllIssues() {
-        return issues;
+        return issueRepository.findAll();
+    }
+
+    public Issue save(Issue issue) {
+        return issueRepository.save(issue);
+    }
+
+
+    public Issue issueBook(Book book, Reader reader) {
+        Issue issue = new Issue(book, reader, LocalDate.now(), null);
+        return issueRepository.save(issue);
     }
 }

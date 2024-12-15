@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Reader</title>
+</head>
+<body>
+<h1>Добавить читателя</h1>
+<form th:action="@{/ui/readers/new}" th:object="${reader}" method="post">
+    <label for="name">имя:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+    <br>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

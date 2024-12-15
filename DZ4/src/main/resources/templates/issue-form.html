@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Issue Book</title>
+</head>
+<body>
+<h1>Выдача книг</h1>
+<form th:action="@{/ui/issues/new}" method="post">
+    <label for="reader">Выберите Читателя:</label>
+    <select id="reader" name="readerId">
+        <option th:each="reader : ${readers}"
+                th:value="*{reader.id}"
+                th:text="*{reader.name}"></option>
+    </select>
+    <br>
+    <label for="book">Выберите книгу:</label>
+    <select id="book" name="bookId">
+        <option th:each="book : ${books}"
+                th:value="*{book.id}"
+                th:text="*{book.title}"></option>
+    </select>
+    <br>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

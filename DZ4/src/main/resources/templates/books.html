@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Books</title>
 </head>
 <body>
+<h1>Список книг</h1>
+<a href="/ui/books/new">Добавить новую книгу</a>
 <table>
-  <tr><th>Title</th><th>Author</th></tr>
-  <tr th:each="book : ${books}">
-    <td th:text="${book.title}"></td>
-    <td th:text="${book.author}"></td>
-  </tr>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Год</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="*{book.id}"></td>
+        <td th:text="*{book.title}"></td>
+        <td th:text="*{book.author}"></td>
+        <td th:text="*{book.year}"></td>
+        <td>
+            <a th:href="@{/ui/books/delete/{id}(id=*{book.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
 </table>
 </body>
 </html>
+

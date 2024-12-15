@@ -14,7 +14,8 @@ public class Book {
     private String author;
     private int year;
 
-    public Book() {}
+    public Book() {
+    }
 
     public Book(Long id, String title, String author, int year) {
         this.id = id;
