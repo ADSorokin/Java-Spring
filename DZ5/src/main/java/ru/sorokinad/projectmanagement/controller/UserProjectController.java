@@ -37,7 +37,7 @@ public class UserProjectController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/remove")
+    @PostMapping ("/remove")
     public ResponseEntity<Void> removeUserFromProject(
             @RequestParam("userId") Long userId,
             @RequestParam("projectId") Long projectId) {
