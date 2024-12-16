@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user-projects")
 public class UserProjectController {
-
     private final UserProjectService userProjectService;
 
     public UserProjectController(UserProjectService userProjectService) {
@@ -31,13 +30,17 @@ public class UserProjectController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addUserToProject(@RequestParam Long userId, @RequestParam Long projectId) {
+    public ResponseEntity<Void> addUserToProject(
+            @RequestParam("userId") Long userId,
+            @RequestParam("projectId") Long projectId) {
         userProjectService.addUserToProject(userId, projectId);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/remove")
-    public ResponseEntity<Void> removeUserFromProject(@RequestParam Long userId, @RequestParam Long projectId) {
+    @DeleteMapping("/remove")
+    public ResponseEntity<Void> removeUserFromProject(
+            @RequestParam("userId") Long userId,
+            @RequestParam("projectId") Long projectId) {
         userProjectService.removeUserFromProject(userId, projectId);
         return ResponseEntity.ok().build();
     }

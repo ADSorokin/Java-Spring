@@ -1,10 +1,8 @@
 package ru.sorokinad.projectmanagement.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 @MappedSuperclass
-@Data
 public abstract class EntityWithRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,4 +10,21 @@ public abstract class EntityWithRelation {
 
     @Column(nullable = false)
     private Long relatedEntityId;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getRelatedEntityId() {
+        return relatedEntityId;
+    }
+
+    public void setRelatedEntityId(Long relatedEntityId) {
+        this.relatedEntityId = relatedEntityId;
+    }
 }
