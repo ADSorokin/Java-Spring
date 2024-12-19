@@ -1,6 +1,7 @@
 package ru.sorokinad.dz6.service;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.sorokinad.dz6.model.Book;
 import ru.sorokinad.dz6.repository.BookRepository;
@@ -9,14 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();

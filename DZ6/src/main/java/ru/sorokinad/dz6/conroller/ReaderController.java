@@ -2,6 +2,7 @@ package ru.sorokinad.dz6.conroller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.sorokinad.dz6.model.Reader;
@@ -13,14 +14,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/readers")
 @Tag(name = "Readers", description = "API для управления читателями")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class ReaderController {
 
     private final ReaderService readerService;
 
-    public ReaderController(ReaderService readerService) {
-        this.readerService = readerService;
-    }
+
 
     @Operation(summary = "Получить список всех читателей", description = "Возвращает полный список читателей")
     @GetMapping

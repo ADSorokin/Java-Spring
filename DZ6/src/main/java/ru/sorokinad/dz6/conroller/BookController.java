@@ -2,6 +2,7 @@ package ru.sorokinad.dz6.conroller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.sorokinad.dz6.model.Book;
@@ -15,16 +16,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/books")
 @Tag(name = "Books", description = "API для управления книгами")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
     private final ReaderService readerService;
 
-    public BookController(BookService bookService, ReaderService readerService) {
-        this.bookService = bookService;
-        this.readerService = readerService;
-    }
+
 
     @Operation(summary = "Получить список всех книг")
     @GetMapping
@@ -58,7 +56,7 @@ public class BookController {
             Book book = bookOptional.get();
             Reader reader = readerOptional.get();
 
-            // Если книга уже назначена другому читателю
+
             if (book.getReader() != null && !book.getReader().getId().equals(readerId)) {
                 return ResponseEntity.badRequest().build();
             }
