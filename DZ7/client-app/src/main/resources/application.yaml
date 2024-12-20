@@ -1,0 +1,18 @@
+#spring.application.name=client-app
+server:
+  port: 8082
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          custom-client:
+            client-id: client-app
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/custom-client"
+            scope: openid,read
+        provider:
+          custom-provider:
+            issuer-uri: http://localhost:8080

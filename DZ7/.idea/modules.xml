@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DZ7.iml" filepath="$PROJECT_DIR$/DZ7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/authorization-server/authorization-server.iml" filepath="$PROJECT_DIR$/authorization-server/authorization-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/client-app/client-app.iml" filepath="$PROJECT_DIR$/client-app/client-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource-server/resource-server.iml" filepath="$PROJECT_DIR$/resource-server/resource-server.iml" />
+    </modules>
+  </component>
+</project>

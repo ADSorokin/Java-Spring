@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Public Data</title>
+</head>
+<body>
+<h1>Публичные данные</h1>
+<p th:text="${message}"></p>
+<div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/private-data">Перейти к приватным данным</a>
+    </div>
+    <a href="/logout">Выйти</a>
+</div>
+</body>
+</html>
