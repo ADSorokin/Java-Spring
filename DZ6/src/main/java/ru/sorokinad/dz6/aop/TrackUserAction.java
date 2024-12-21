@@ -1,4 +1,4 @@
-package ru.sorokinad.dz8.aop;
+package ru.sorokinad.dz6.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

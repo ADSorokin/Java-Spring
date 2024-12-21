@@ -1,10 +1,10 @@
-package ru.sorokinad.dz8;
+package ru.sorokinad.dz6;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Dz8ApplicationTests {
+class LibraryManagementApplicationTests {
 
     @Test
     void contextLoads() {

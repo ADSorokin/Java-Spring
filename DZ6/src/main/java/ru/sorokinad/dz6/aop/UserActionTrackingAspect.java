@@ -1,4 +1,4 @@
-package ru.sorokinad.dz8.aop;
+package ru.sorokinad.dz6.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,15 +15,15 @@ public class UserActionTrackingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(UserActionTrackingAspect.class);
 
-    @Before("@annotation(ru.sorokinad.dz8.aop.TrackUserAction)")
+    @Before("@annotation(ru.sorokinad.dz6.aop.TrackUserAction)")
     public void trackUserAction(JoinPoint joinPoint) {
-        // На практике текущего пользователя можно получить через SecurityContext.
-        String currentUser = "GuestUser"; // Для примера - фиктивный пользователь.
+
+        String currentUser = "GuestUser";
 
         String methodName = joinPoint.getSignature().toString();
         Object[] args = joinPoint.getArgs();
 
-        // Логируем информацию о вызове
+
         logger.info("User '{}' invoked method '{}', with arguments: {}", currentUser, methodName, Arrays.toString(args));
     }
 }

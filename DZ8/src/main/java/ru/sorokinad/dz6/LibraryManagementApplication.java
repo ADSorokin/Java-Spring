@@ -1,4 +1,4 @@
-package ru.sorokinad.dz8;
+package ru.sorokinad.dz6;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
