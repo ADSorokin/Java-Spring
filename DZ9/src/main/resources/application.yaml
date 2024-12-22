@@ -1,0 +1,15 @@
+server:
+  port: 8765
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: Book-Service
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/bookservice/**
+        - id: Reader-Service
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/readerervice/**
+
