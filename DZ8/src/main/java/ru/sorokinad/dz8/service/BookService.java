@@ -1,14 +1,14 @@
-package ru.sorokinad.dz6.service;
+package ru.sorokinad.dz8.service;
 
 
 import jakarta.persistence.OptimisticLockException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sorokinad.dz6.aop.TrackUserAction;
-import ru.sorokinad.dz6.model.Book;
-import ru.sorokinad.dz6.model.Reader;
-import ru.sorokinad.dz6.repository.BookRepository;
-import ru.sorokinad.dz6.repository.ReaderRepository;
+import ru.sorokinad.dz8.aop.TrackUserAction;
+import ru.sorokinad.dz8.model.Book;
+import ru.sorokinad.dz8.model.Reader;
+import ru.sorokinad.dz8.repository.BookRepository;
+import ru.sorokinad.dz8.repository.ReaderRepository;
 
 
 import java.util.List;

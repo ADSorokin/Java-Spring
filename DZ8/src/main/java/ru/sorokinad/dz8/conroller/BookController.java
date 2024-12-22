@@ -1,14 +1,14 @@
-package ru.sorokinad.dz6.conroller;
+package ru.sorokinad.dz8.conroller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import ru.sorokinad.dz6.model.Book;
-import ru.sorokinad.dz6.model.Reader;
-import ru.sorokinad.dz6.service.BookService;
-import ru.sorokinad.dz6.service.ReaderService;
+import ru.sorokinad.dz8.model.Book;
+import ru.sorokinad.dz8.model.Reader;
+import ru.sorokinad.dz8.service.BookService;
+import ru.sorokinad.dz8.service.ReaderService;
 
 import java.util.List;
 import java.util.Optional;

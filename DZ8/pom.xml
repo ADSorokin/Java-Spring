@@ -11,8 +11,8 @@
     <groupId>ru.sorokinad</groupId>
     <artifactId>DZ6</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DZ8</name>
-    <description>DZ8</description>
+    <name>DZ6</name>
+    <description>DZ6</description>
     <url/>
     <licenses>
         <license/>
@@ -28,6 +28,8 @@
     </scm>
     <properties>
         <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -53,10 +55,10 @@
             <scope>provided</scope>
         </dependency>
         <!-- Flyway for Database Migration -->
-       <dependency>-->
-           <groupId>org.flywaydb</groupId>-->
-           <artifactId>flyway-core</artifactId>-->
-        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.flywaydb</groupId>-->
+        <!--            <artifactId>flyway-core</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>com.mysql</groupId>
@@ -73,14 +75,7 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.1.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -109,5 +104,4 @@
             </plugin>
         </plugins>
     </build>
-
-</project>
+        </project>

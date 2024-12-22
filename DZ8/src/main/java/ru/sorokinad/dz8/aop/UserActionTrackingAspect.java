@@ -1,4 +1,4 @@
-package ru.sorokinad.dz6.aop;
+package ru.sorokinad.dz8.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,7 +15,7 @@ public class UserActionTrackingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(UserActionTrackingAspect.class);
 
-    @Before("@annotation(ru.sorokinad.dz6.aop.TrackUserAction)")
+    @Before("@annotation(ru.sorokinad.dz8.aop.TrackUserAction)")
     public void trackUserAction(JoinPoint joinPoint) {
 
         String currentUser = "GuestUser";
