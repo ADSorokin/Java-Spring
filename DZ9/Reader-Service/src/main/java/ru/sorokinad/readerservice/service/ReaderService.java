@@ -1,0 +1,58 @@
+package ru.sorokinad.readerservice.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.sorokinad.readerservice.aop.TrackUserAction;
+import ru.sorokinad.readerservice.model.Reader;
+import ru.sorokinad.readerservice.repository.BookRepository;
+
+import ru.sorokinad.readerservice.repository.ReaderRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+//@RequiredArgsConstructor
+public class ReaderService {
+    private final BookRepository bookRepository;
+    private final ReaderRepository readerRepository;
+
+    public ReaderService(BookRepository bookRepository, ReaderRepository readerRepository) {
+        this.bookRepository = bookRepository;
+        this.readerRepository = readerRepository;}
+
+    @TrackUserAction
+    public List<Reader> getAllReaders() {
+        return readerRepository.findAll();
+    }
+    @TrackUserAction
+    public Optional<Reader> getReaderById(Long id) {
+        return readerRepository.findById(id);
+    }
+    @Transactional
+    @TrackUserAction
+    public Reader saveReader(Reader reader) {
+        return readerRepository.save(reader);
+    }
+ //   @Transactional
+ //   @TrackUserAction
+//    public void deleteReader(Long id) {
+//        readerRepository.deleteById(id);
+ //   }
+    @Transactional
+    @TrackUserAction
+    public void deleteReaderAndUnassignBooks(Long readerId) {
+
+        Reader reader = readerRepository.findById(readerId)
+                .orElseThrow(() -> new IllegalArgumentException("Reader with ID " + readerId + " not found."));
+
+        reader.getBooks().forEach(book -> {
+            book.setReader(null);
+
+            bookRepository.save(book); // Сохраняем изменения
+        });
+
+
+        readerRepository.delete(reader);
+    }
+}
