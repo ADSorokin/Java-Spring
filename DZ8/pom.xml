@@ -58,11 +58,11 @@
            <artifactId>flyway-core</artifactId>-->
         </dependency>-->
 
-        <de.pendency>
+        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.3.0</version>
-        </de.pendency>
+        </dependency>
 
         <!-- Spring Boot Starters -->
 
