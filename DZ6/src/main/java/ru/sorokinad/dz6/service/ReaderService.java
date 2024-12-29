@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.sorokinad.dz6.aop.TrackUserAction;
 import ru.sorokinad.dz6.model.Reader;
 import ru.sorokinad.dz6.repository.BookRepository;
+import ru.sorokinad.dz6.repository.IssueRepository;
 import ru.sorokinad.dz6.repository.ReaderRepository;
 
 import java.util.List;
@@ -16,9 +17,13 @@ public class ReaderService {
     private final BookRepository bookRepository;
     private final ReaderRepository readerRepository;
 
-    public ReaderService(BookRepository bookRepository, ReaderRepository readerRepository) {
+    private final IssueRepository issueRepository;
+
+    public ReaderService(BookRepository bookRepository, ReaderRepository readerRepository, IssueRepository issueRepository) {
         this.bookRepository = bookRepository;
-        this.readerRepository = readerRepository;}
+        this.readerRepository = readerRepository;
+        this.issueRepository = issueRepository;
+    }
 
     @TrackUserAction
     public List<Reader> getAllReaders() {

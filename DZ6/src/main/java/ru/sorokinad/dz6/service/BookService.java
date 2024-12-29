@@ -8,6 +8,7 @@ import ru.sorokinad.dz6.aop.TrackUserAction;
 import ru.sorokinad.dz6.model.Book;
 import ru.sorokinad.dz6.model.Reader;
 import ru.sorokinad.dz6.repository.BookRepository;
+import ru.sorokinad.dz6.repository.IssueRepository;
 import ru.sorokinad.dz6.repository.ReaderRepository;
 
 
@@ -22,6 +23,8 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final ReaderRepository readerRepository;
+
+    private final IssueRepository issueRepository;
 
     public BookService(BookRepository bookRepository, ReaderRepository readerRepository) {
         this.bookRepository = bookRepository;
@@ -61,11 +64,11 @@ public class BookService {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
-
-
             book.setTitle(updatedBook.getTitle());
             book.setAuthor(updatedBook.getAuthor());
-
+            book.setPublicationYear(updatedBook.getPublicationYear());
+            book.setAvailableCopies(updatedBook.getAvailableCopies());
+            book.setPublisher(updatedBook.getPublisher());
             try {
                 return bookRepository.save(book);
             } catch (OptimisticLockException e) {
@@ -77,14 +80,14 @@ public class BookService {
     }
     @Transactional
     @TrackUserAction
-    public void registerReaderWithBooks(Reader reader, List<Book> books) {
+    public void registerReaderWithBooks(Reader reader, Book book) {
         // Сохраняем читателя
         Reader savedReader = readerRepository.save(reader);
 
         // Привязываем книги к читателю
-        books.forEach(book -> {
+        i.forEach(book -> {
             // Проверяем, что книга не привязана к другому читателю
-            if (book.getReader() != null) {
+            if (issueRepository.() != null) {
                 throw new IllegalStateException("Book with id " + book.getId() + " is already assigned to a reader.");
             }
             book.setReader(savedReader);

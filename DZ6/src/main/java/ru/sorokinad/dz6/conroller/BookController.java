@@ -43,12 +43,24 @@ public class BookController {
         return book.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+
     @Transactional
     @Operation(summary = "Добавить новую книгу")
     @PostMapping("/add")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         return ResponseEntity.ok(bookService.saveBook(book));
     }
+
+    @Transactional
+    @Operation(summary = "Обновить книгу")
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
+        Book updatedBook = bookService.updateBook(id, book);
+        return ResponseEntity.ok(updatedBook);
+    }
+
+
     @Transactional
     @Operation(summary = "Назначить книгу читателю")
     @PutMapping("/{bookId}/assign/{readerId}")

@@ -1,0 +1,325 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Редактировать Книгу</title>-->
+<!--    <link rel="stylesheet" href="styles.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <h1>Редактирование Книги</h1>-->
+<!--    <nav>-->
+<!--        <a href="/books">Список Книг</a>-->
+<!--        <a href="/readers">Список Читателей</a>-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<main>-->
+<!--    <h2>Форма редактирования книги</h2>-->
+<!--    &lt;!&ndash; Форма для редактирования книги &ndash;&gt;-->
+<!--&lt;!&ndash;    <form id="editBookForm" th:action="@{${book.id != null ? '/books/' + book.id + '/edit' : '/books/add'}}" method="post">&ndash;&gt;-->
+<!--        <form id="editBookForm" th:action="/books/update" method="POST">-->
+<!--            <input type="hidden" name="_method" value="POST"/>-->
+<!--        &lt;!&ndash; Скрытое поле для ID книги &ndash;&gt;-->
+<!--        <input type="hidden" name="id" id="bookId" th:value="${book?.id}">-->
+
+<!--        <label for="title">Название книги:</label>-->
+<!--        <input type="text" name="title" id="title" th:value="${book?.title}" placeholder="Введите название книги" required>-->
+
+<!--        <label for="author">Автор книги:</label>-->
+<!--        <input type="text" name="author" id="author" th:value="${book?.author}" placeholder="Введите автора" required>-->
+
+<!--        <label for="publisher">Издатель:</label>-->
+<!--        <input type="text" name="publisher" id="publisher" th:value="${book?.publisher}" placeholder="Введите издателя" required>-->
+
+<!--        <label for="publicationYear">Год публикации:</label>-->
+<!--        <input type="number" name="publicationYear" id="publicationYear" th:value="${book?.publicationYear}" placeholder="Введите год публикации" required>-->
+
+<!--        <label for="totalCopies">Общее количество копий:</label>-->
+<!--        <input type="number" name="totalCopies" id="totalCopies" th:value="${book?.totalCopies}" placeholder="Введите количество копий" required>-->
+
+<!--        <button type="submit">Сохранить изменения</button>-->
+<!--    </form>-->
+<!--</main>-->
+
+<!--<script>-->
+<!--    // Функция получения параметров из URL-->
+<!--    function getQueryParam(param) {-->
+<!--        const urlParams = new URLSearchParams(window.location.search);-->
+<!--        return urlParams.get(param);-->
+<!--    }-->
+
+<!--    // Получаем ID книги из URL-->
+<!--    const bookId = getQueryParam("id");-->
+
+<!--    if (bookId) {-->
+<!--        // Загружаем данные книги с сервера-->
+<!--        fetch(`/books/${bookId}`)-->
+<!--            .then(response => {-->
+<!--                if (!response.ok) throw new Error("Ошибка загрузки данных книги");-->
+<!--                return response.json();-->
+<!--            })-->
+<!--            .then(book => {-->
+<!--                // Заполняем форму данными о книге-->
+<!--                document.getElementById("bookId").value = book.id;-->
+<!--                document.getElementById("title").value = book.title;-->
+<!--                document.getElementById("author").value = book.author;-->
+<!--                document.getElementById("publisher").value = book.publisher;-->
+<!--                document.getElementById("publicationYear").value = book.publicationYear;-->
+<!--                document.getElementById("totalCopies").value = book.totalCopies;-->
+
+<!--                // Обновляем action формы-->
+<!--                document.getElementById("editBookForm").action = `/books/${book.id}/edit`;-->
+<!--            })-->
+<!--            .catch(error => console.error("Ошибка загрузки данных:", error));-->
+<!--    } else {-->
+<!--        // Если это новая книга, устанавливаем соответствующий action-->
+<!--        document.getElementById("editBookForm").action = "/books/add";-->
+<!--    }-->
+<!--</script>-->
+
+<!--<footer>-->
+<!--    <p>&copy; 2024 Библиотека</p>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Редактировать Книгу</title>-->
+<!--    <link rel="stylesheet" href="styles.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <h1>Редактирование Книги</h1>-->
+<!--    <nav>-->
+<!--        <a href="/books">Список Книг</a>-->
+<!--        <a href="/readers">Список Читателей</a>-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<main>-->
+<!--    <h2>Форма редактирования книги</h2>-->
+<!--    &lt;!&ndash; Форма для редактирования книги &ndash;&gt;-->
+<!--    &lt;!&ndash;    <form id="editBookForm" th:action="@{${book.id != null ? '/books/' + book.id + '/edit' : '/books/add'}}" method="post">&ndash;&gt;-->
+<!--    <form id="editBookForm" action="/books/update" method="POST">-->
+
+<!--        &lt;!&ndash; Скрытое поле для ID книги &ndash;&gt;-->
+<!--        <input type="hidden" name="id" id="bookId">-->
+
+<!--        <label for="title">Название книги:</label>-->
+<!--        <input type="text" name="title" id="title"  placeholder="Введите название книги" required>-->
+
+<!--        <label for="author">Автор книги:</label>-->
+<!--        <input type="text" name="author" id="author" placeholder="Введите автора" required>-->
+
+<!--        <label for="publisher">Издатель:</label>-->
+<!--        <input type="text" name="publisher" id="publisher" placeholder="Введите издателя" required>-->
+
+<!--        <label for="publicationYear">Год публикации:</label>-->
+<!--        <input type="number" name="publicationYear" id="publicationYear" placeholder="Введите год публикации" required>-->
+
+<!--        <label for="totalCopies">Общее количество копий:</label>-->
+<!--        <input type="number" name="totalCopies" id="totalCopies" placeholder="Введите количество копий" required>-->
+
+<!--        <button type="submit">Сохранить изменения</button>-->
+<!--    </form>-->
+<!--</main>-->
+
+
+
+<!--<footer>-->
+<!--    <p>&copy; 2024 Библиотека</p>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title th:text="${book?.id != null ? 'Редактировать Книгу' : 'Добавить Книгу'}">Редактировать Книгу</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header class="container mb-4">-->
+<!--    <h1 th:text="${book?.id != null ? 'Редактировать Книгу' : 'Добавить Книгу'}">Редактирование Книги</h1>-->
+<!--    <nav class="nav">-->
+<!--        <a class="nav-link" href="/books">Список Книг</a>-->
+<!--        <a class="nav-link" href="/readers">Список Читателей</a>-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<main class="container">-->
+
+<!--    <h2>Форма редактирования книги</h2>-->
+
+<!--    <form id="editBookForm" th:action="@{${book?.id != null ? '/books/' + book.id + '/edit' : '/books/add'}}" method="post">-->
+<!--        &lt;!&ndash; Поле для ID книги (скрытое, обязательно для редактирования) &ndash;&gt;-->
+<!--        <input type="hidden" name="id" th:value="${book?.id}" />-->
+
+<!--        <div class="mb-3">-->
+<!--            <label for="title" class="form-label">Название книги:</label>-->
+<!--            <input type="text" name="title" id="title" class="form-control"-->
+<!--                   th:value="${book?.title}" placeholder="Введите название книги" required />-->
+<!--        </div>-->
+
+<!--        <div class="mb-3">-->
+<!--            <label for="author" class="form-label">Автор книги:</label>-->
+<!--            <input type="text" name="author" id="author" class="form-control"-->
+<!--                   th:value="${book?.author}" placeholder="Введите автора" required />-->
+<!--        </div>-->
+
+<!--        <div class="mb-3">-->
+<!--            <label for="publisher" class="form-label">Издатель:</label>-->
+<!--            <input type="text" name="publisher" id="publisher" class="form-control"-->
+<!--                   th:value="${book?.publisher}" placeholder="Введите издателя" required />-->
+<!--        </div>-->
+
+<!--        <div class="mb-3">-->
+<!--            <label for="publicationYear" class="form-label">Год публикации:</label>-->
+<!--            <input type="number" name="publicationYear" id="publicationYear" class="form-control"-->
+<!--                   th:value="${book?.publicationYear}" placeholder="Введите год публикации" required />-->
+<!--        </div>-->
+
+<!--        <div class="mb-3">-->
+<!--            <label for="totalCopies" class="form-label">Общее количество копий:</label>-->
+<!--            <input type="number" name="totalCopies" id="totalCopies" class="form-control"-->
+<!--                   th:value="${book?.totalCopies}" placeholder="Введите количество копий" required />-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="btn btn-primary">Сохранить изменения</button>-->
+<!--    </form>-->
+<!--</main>-->
+<!--<footer class="container mt-4 text-center">-->
+<!--    <p>&copy; 2024 Библиотека</p>-->
+<!--</footer>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${book?.id != null ? 'Редактировать Книгу' : 'Добавить Книгу'}">Книги</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <!-- Подключение Bootstrap (опционально) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="container mb-4">
+    <h1 class="my-3">Управление Книгами</h1>
+    <nav class="nav">
+        <a class="nav-link" href="/books">Книги</a>
+        <a class="nav-link" href="/readers">Читатели</a>
+        <a class="nav-link" href="/">Назад</a>
+    </nav>
+</header>
+
+<main class="container">
+    <!-- Сообщения об успешных действиях или ошибках -->
+    <div th:if="${successMessage}" class="alert alert-success">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+     Форма добавления или редактирования книги
+    <section class="mb-5">
+        <h2 th:text="${book?.id != null ? 'Редактировать Книгу' : 'Добавить Книгу'}"></h2>
+        <form th:action="@{${book?.id != null ? '/books/edit/' + book.id  : '/books/add'}}" method="post">
+            <!-- Скрытое поле для ID книги -->
+            <input type="hidden" name="id" th:value="${book?.id}">
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Название книги:</label>
+                <input type="text" name="title" id="title" class="form-control"
+                       th:value="${book?.title}" placeholder="Введите название книги" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Автор книги:</label>
+                <input type="text" name="author" id="author" class="form-control"
+                       th:value="${book?.author}" placeholder="Введите автора" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="publisher" class="form-label">Издатель:</label>
+                <input type="text" name="publisher" id="publisher" class="form-control"
+                       th:value="${book?.publisher}" placeholder="Введите издателя" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="publicationYear" class="form-label">Год публикации:</label>
+                <input type="number" name="publicationYear" id="publicationYear" class="form-control"
+                       th:value="${book?.publicationYear}" placeholder="Введите год публикации" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="totalCopies" class="form-label">Общее количество копий:</label>
+                <input type="number" name="totalCopies" id="totalCopies" class="form-control"
+                       th:value="${book?.totalCopies}" placeholder="Введите количество копий" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" th:text="${book?.id != null ? 'Сохранить изменения' : 'Добавить'}">
+            </button>
+        </form>
+    </section>
+
+    <!-- Таблица со списком всех книг -->
+    <section>
+        <h2>Список всех книг</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Издатель</th>
+                <th>Год</th>
+                <th>Всего копий</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Перебираем книги и выводим строки таблицы -->
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publisher}"></td>
+                <td th:text="${book.publicationYear}"></td>
+                <td th:text="${book.totalCopies}"></td>
+                <td>
+                    <!-- Кнопка Удалить -->
+                    <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post">
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Вы уверены, что хотите удалить эту книгу?')">Удалить</button>
+                    </form>
+                    <!-- Кнопка Редактировать -->
+                    <a th:href="@{/books/edit/{id}(id=${book.id})}"
+                       class="btn btn-primary btn-sm">Редактировать</a>
+
+
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer class="container mt-4 text-center">
+    <p>&copy; 2024 Библиотека</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

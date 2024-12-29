@@ -25,10 +25,7 @@ public class Reader {
     private List<Book> books = new ArrayList<>();
 
 
-    public void addBook(Book book) {
-        books.add(book);
-        book.setReader(this);
-    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -63,6 +60,13 @@ public class Reader {
         this.name = name;
         this.email = email;
         this.books = books;
+    }
+
+    public Reader( String name, String email) {
+
+        this.name = name;
+        this.email = email;
+
     }
 
     public Long getId() {

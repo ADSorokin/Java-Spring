@@ -1,43 +1,37 @@
-package ru.sorokinad.dz6.model;
+package ru.sorokinad.dz10.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
-@Table(name = "books")
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String title;
+
     private String author;
+
     private String publisher;
     private int publicationYear;
+    private int totalCopies;
     private int availableCopies;
 
 
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "reader_id")
-//    @JsonIgnore
-//    private Reader reader;
-
-
-
-
-    public Book() {
-    }
-
-    public Book(Long id, String title, String author, String publisher, int publicationYear, int availableCopies) {
+    public Book(Long id, String title, String author, String publisher, int publicationYear, int totalCopies) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.publicationYear = publicationYear;
-        this.availableCopies = availableCopies;
+        this.totalCopies = totalCopies;
+
+
     }
 
 
@@ -73,15 +67,20 @@ public class Book {
         this.publisher = publisher;
     }
 
-
-    }
-
     public int getPublicationYear() {
         return publicationYear;
     }
 
     public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
+    }
+
+    public int getTotalCopies() {
+        return totalCopies;
+    }
+
+    public void setTotalCopies(int totalCopies) {
+        this.totalCopies = totalCopies;
     }
 
     public int getAvailableCopies() {
@@ -93,6 +92,27 @@ public class Book {
     }
 
 
+    public boolean isAvailable() {
+        return availableCopies > 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    public Book() {
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 
 }
