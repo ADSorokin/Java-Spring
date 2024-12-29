@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать Книгу</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <!-- Подключение Bootstrap (опционально) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Редактирование Книги</h1>
+    <nav>
+        <a href="/books">Список Книг</a>
+        <a href="/readers">Список Читателей</a>
+    </nav>
+</header>
+<main>
+    <!-- Сообщения об успешных действиях или ошибках -->
+    <div th:if="${successMessage}" class="alert alert-success">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <h2>Форма редактирования книги</h2>
+    <!-- Форма для редактирования книги -->
+    <form id="editBookForm" action="/books/update" method="post">
+        <!-- Скрытое поле для ID книги -->
+        <input type="hidden" name="id" id="bookId">
+
+        <label for="title">Название книги:</label>
+        <input type="text" name="title" id="title" placeholder="Введите название книги" required>
+
+        <label for="author">Автор книги:</label>
+        <input type="text" name="author" id="author" placeholder="Введите автора" required>
+
+        <label for="publisher">Издатель:</label>
+        <input type="text" name="publisher" id="publisher" placeholder="Введите издателя" required>
+
+        <label for="publicationYear">Год публикации:</label>
+        <input type="number" name="publicationYear" id="publicationYear" placeholder="Введите год публикации" required>
+
+        <label for="totalCopies">Общее количество копий:</label>
+        <input type="number" name="totalCopies" id="totalCopies" placeholder="Введите количество копий" required>
+
+        <button type="submit">Сохранить изменения</button>
+    </form>
+</main>
+
+
+<footer>
+    <p>&copy; 2024 Библиотека</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выдача книг читателям</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="mb-4">
+        <h1>Выдача книг читателям</h1>
+        <nav class="nav">
+            <a class="nav-link" href="/">Главная</a>
+            <a class="nav-link" href="/readers">Читатели</a>
+            <a class="nav-link" href="/books">Книги</a>
+        </nav>
+    </header>
+
+    <!-- Сообщения -->
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <!-- Форма выдачи -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2>Выдать книгу</h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/reader-books/assign}" method="post">
+                <div class="mb-3">
+                    <label for="readerId" class="form-label">Читатель</label>
+                    <select class="form-select" id="readerId" name="readerId" required>
+                        <option value="">Выберите читателя</option>
+                        <option th:each="reader : ${readers}"
+                                th:value="${reader.id}"
+                                th:text="${reader.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="bookId" class="form-label">Книга</label>
+                    <select class="form-select" id="bookId" name="bookId" required>
+                        <option value="">Выберите книгу</option>
+<!--                        <option th:each="book : ${availableBooks}"-->
+<!--                                th:value="${book.id}"-->
+<!--                                th:text="${book.title + ' (' + book.author + ')'}">-->
+<!--                        </option>-->
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Выдать книгу</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Таблица выданных книг -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Выданные книги</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" th:if="${not #lists.isEmpty(readerBooks)}">
+                <thead>
+                <tr>
+                    <th>Читатель</th>
+                    <th>Книга</th>
+                    <th>Дата выдачи</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="readerBook : ${readerBooks}">
+                    <td th:text="${readerBook.reader.name}"></td>
+                    <td th:text="${readerBook.book.title + ' (' + readerBook.book.author + ')'}"></td>
+                    <td th:text="${#temporals.format(readerBook.borrowTimestamp, 'dd.MM.yyyy HH:mm')}"></td>
+                    <td>
+                        <form th:action="@{/reader-books/return}" method="post" style="display: inline;">
+                            <input type="hidden" name="readerId" th:value="${readerBook.id.readerId}"/>
+                            <input type="hidden" name="bookId" th:value="${readerBook.id.bookId}"/>
+                            <button type="submit" class="btn btn-warning btn-sm">Вернуть</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${#lists.isEmpty(readerBooks)}" class="alert alert-info">
+                Нет выданных книг
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Выдача книг читателям</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link th:href="@{/css/styles.css}" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header class="mb-4">-->
+<!--    <div class="container">-->
+<!--        <h1>Выдача книг читателям</h1>-->
+<!--        <nav class="nav">-->
+<!--            <a class="nav-link" href="/">Главная</a>-->
+<!--            <a class="nav-link" href="/readers">Читатели</a>-->
+<!--            <a class="nav-link" href="/books">Книги</a>-->
+<!--        </nav>-->
+<!--    </div>-->
+<!--</header>-->
+
+<!--<main class="container">-->
+<!--    &lt;!&ndash; Сообщения об успехе/ошибке &ndash;&gt;-->
+<!--    <div th:if="${successMessage}" class="alert alert-success">-->
+<!--        <p th:text="${successMessage}"></p>-->
+<!--    </div>-->
+<!--    <div th:if="${errorMessage}" class="alert alert-danger">-->
+<!--        <p th:text="${errorMessage}"></p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Форма выдачи книги &ndash;&gt;-->
+<!--    <section class="card mb-4">-->
+<!--        <div class="card-header">-->
+<!--            <h2>Выдать книгу</h2>-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--            <form th:action="@{/reader-books/assign}" method="post">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="readerId" class="form-label">Читатель</label>-->
+<!--                    <select class="form-select" id="readerId" name="readerId" required>-->
+<!--                        <option value="">Выберите читателя</option>-->
+<!--                        <option th:each="reader : ${readers}"-->
+<!--                                th:value="${reader.id}"-->
+<!--                                th:text="${reader.name}">-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+<!--                <div class="mb-3">-->
+<!--                    <label for="bookId" class="form-label">Книга</label>-->
+<!--                    <select class="form-select" id="bookId" name="bookId" required>-->
+<!--                        <option value="">Выберите книгу</option>-->
+<!--                        <option th:each="book : ${availableBooks}"-->
+<!--                                th:value="${book.id}"-->
+<!--                                th:text="${book.title + ' (' + book.author + ')'}">-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+<!--                <button type="submit" class="btn btn-primary">Выдать книгу</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Таблица выданных книг &ndash;&gt;-->
+<!--    <section class="card">-->
+<!--        <div class="card-header">-->
+<!--            <h2>Выданные книги</h2>-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--            <table class="table table-striped">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>Читатель</th>-->
+<!--                    <th>Книга</th>-->
+<!--                    <th>Дата выдачи</th>-->
+<!--                    <th>Действия</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="readerBook : ${readerBooks}">-->
+<!--                    <td th:text="${readerBook.reader.name}"></td>-->
+<!--                    <td th:text="${readerBook.book.title + ' (' + readerBook.book.author + ')'}"></td>-->
+<!--                    <td th:text="${#temporals.format(readerBook.borrowTimestamp, 'dd.MM.yyyy HH:mm')}"></td>-->
+<!--                    <td>-->
+<!--                        <form th:action="@{/reader-books/return}" method="post" style="display: inline;">-->
+<!--                            <input type="hidden" name="readerId" th:value="${readerBook.reader.id}">-->
+<!--                            <input type="hidden" name="bookId" th:value="${readerBook.book.id}">-->
+<!--                            <button type="submit" class="btn btn-warning btn-sm"-->
+<!--                                    onclick="return confirm('Вы уверены, что хотите вернуть книгу?')">-->
+<!--                                Вернуть книгу-->
+<!--                            </button>-->
+<!--                        </form>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--            <div th:if="${#lists.isEmpty(readerBooks)}" class="alert alert-info">-->
+<!--                Нет выданных книг-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</main>-->
+
+<!--<footer class="mt-4 text-center">-->
+<!--    <p>&copy; 2024 Библиотека</p>-->
+<!--</footer>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
