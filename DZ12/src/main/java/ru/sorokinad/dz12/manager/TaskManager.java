@@ -12,7 +12,7 @@ public class TaskManager {
     private List<Task> tasks = new ArrayList<>();
     private List<TaskObserver> observers = new ArrayList<>();
 
-    private TaskManager() {} // Приватный конструктор
+    private TaskManager() {}
 
     public static TaskManager getInstance() {
         return instance;
@@ -35,5 +35,9 @@ public class TaskManager {
         for (TaskObserver observer : observers) {
             observer.update(task);
         }
+    }
+
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
     }
 }
