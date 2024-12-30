@@ -1,8 +1,8 @@
 -- Создание схемы базы данных
-CREATE SCHEMA IF NOT EXISTS testdb;
+CREATE SCHEMA IF NOT EXISTS DZ12DB;
 
 -- Переход к схеме
-SET SCHEMA testdb;
+SET SCHEMA DZ12DB;
 
 -- Создание таблицы внутри схемы
 CREATE TABLE IF NOT EXISTS task (
