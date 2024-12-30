@@ -1,21 +1,20 @@
 package ru.sorokinad.dz11_extra.task;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
-
+@Table(name = "task")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
     private boolean urgent;
 
     public Task(String title, String description, boolean urgent) {
