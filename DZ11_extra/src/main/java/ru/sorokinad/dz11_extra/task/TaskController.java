@@ -19,46 +19,43 @@ public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
 
-
     private final Counter addTaskCounter = Metrics.counter("add_task_count");
 
-    @PostMapping("/add")
-    public ResponseEntity<Task> CreateTask(@RequestBody Task task){
 
+    @PostMapping
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
         addTaskCounter.increment();
-
         return new ResponseEntity<>(taskRepository.save(task), HttpStatus.CREATED);
     }
 
-
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
-
-        return   new ResponseEntity<>(taskRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(taskRepository.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public Task createTask(@RequestBody Task task) {
-        return taskRepository.save(task);
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        return taskRepository.findById(id)
+                .map(task -> new ResponseEntity<>(task, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
-    @GetMapping("get/{id}")
-    public ResponseEntity<Task>getTaskByID(@PathVariable Long id){
-        return new ResponseEntity<>(taskRepository.findById(id).orElse(null),HttpStatus.OK);
-    }
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Task> updateNote(@PathVariable Long id, @RequestBody Task task){
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) { // Переименован метод
+        if (!taskRepository.existsById(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         task.setId(id);
-
-        return new ResponseEntity<>(taskRepository.save(task),HttpStatus.OK);
+        return new ResponseEntity<>(taskRepository.save(task), HttpStatus.OK);
     }
 
-    @PostMapping("delete/{id}")
-    public ResponseEntity<Task> deleteNote(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) { // Переименован метод
+        if (!taskRepository.existsById(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         taskRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
 }
+
